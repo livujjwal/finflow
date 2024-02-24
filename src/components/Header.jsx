@@ -33,10 +33,10 @@ const Header = () => {
           : "z-20 bg-theme py-2 px-6 sticky top-0 left-0 w-screen flex justify-between items-center"
       }
     >
-      <p className="text-white font-medium ">WalletWizard</p>
+      <p className="text-white font-medium ">FinFlow</p>
       <div className="flex items-center gap-4">
         <img
-          className="w-6 text-transparent "
+          className="w-6 text-transparent cursor-pointer"
           src={themeImg}
           alt="Theme"
           onClick={() => {

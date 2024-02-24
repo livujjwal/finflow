@@ -1,12 +1,8 @@
 import React, { useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
-import {
-  GoogleAuthProvider,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-} from "firebase/auth";
-import { auth, db, doc, provider, setDoc } from "../firebase";
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { auth, provider } from "../firebase";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
@@ -23,7 +19,6 @@ const Login = () => {
     else {
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-          const user = userCredential.user;
           toast.success("User Logged In Successfully");
           setEmail("");
           setPassword("");
@@ -31,7 +26,6 @@ const Login = () => {
           navigate("/dashboard");
         })
         .catch((error) => {
-          const errorCode = error.code;
           toast.error(error.message);
           setLoading(false);
         });
@@ -40,14 +34,10 @@ const Login = () => {
   function handleGoogleLogin() {
     signInWithPopup(auth, provider)
       .then((result) => {
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        const user = result.user;
         toast.success("User Logged In Successfully");
         navigate("/dashboard");
       })
       .catch((error) => {
-        const errorCode = error.code;
         toast.error(error.message);
       });
   }

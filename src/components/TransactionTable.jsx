@@ -1,4 +1,3 @@
-import { Radio } from "antd";
 import { useState, useContext } from "react";
 import searchImg from "../assets/search.svg";
 import { parse, unparse } from "papaparse";
@@ -7,7 +6,7 @@ import ThemeContext from "../utils/ThemeContext";
 import { Basic } from "./Table";
 const TransactionTable = ({ transactions, addTransaction, getTransaction }) => {
   const { theme } = useContext(ThemeContext);
-  const [loading, setLaoding] = useState(false);
+  const [loading] = useState(false);
   const [search, setSearch] = useState("");
   const [typeFilter, setTypeFilter] = useState("");
   const [sortKey, setSortKey] = useState("noSort");
@@ -115,7 +114,7 @@ const TransactionTable = ({ transactions, addTransaction, getTransaction }) => {
           </option>
         </select>
       </div>
-      {transactions.length != 0 && (
+      {transactions.length !== 0 && (
         <div
           className={
             theme === "dark"

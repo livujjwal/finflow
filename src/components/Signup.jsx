@@ -1,11 +1,7 @@
 import React, { useContext, useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
-import {
-  GoogleAuthProvider,
-  createUserWithEmailAndPassword,
-  signInWithPopup,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth, db, doc, setDoc, getDoc, provider } from "../firebase";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -14,7 +10,7 @@ const Signup = () => {
   const { theme } = useContext(ThemeContext);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [photoURL, setPhotoURL] = useState("");
+  const [photoURL] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -39,7 +35,6 @@ const Signup = () => {
           navigate("/dashboard");
         })
         .catch((error) => {
-          const errorCode = error.code;
           toast.error(error.message);
           setLoading(false);
         });
@@ -70,8 +65,6 @@ const Signup = () => {
     setLoading(true);
     signInWithPopup(auth, provider)
       .then((result) => {
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
         const user = result.user;
         createDoc(user);
         setLoading(false);
@@ -79,7 +72,6 @@ const Signup = () => {
         navigate("/dashboard");
       })
       .catch((error) => {
-        const errorCode = error.code;
         toast.error(error.message);
       });
   }

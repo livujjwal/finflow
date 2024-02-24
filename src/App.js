@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Signup from "./components/Signup";
 import Dashboard from "./components/Dashboard";
@@ -15,7 +15,7 @@ function App() {
     <div
       test-id="app"
       className={
-        theme == "dark"
+        theme === "dark"
           ? "text-[#e6e6e6] bg-gradient-to-tr from-[#0e1c26] to-[#0D1113]"
           : ""
       }
